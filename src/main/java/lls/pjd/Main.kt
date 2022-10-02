@@ -12,7 +12,7 @@ object Main {
     fun main(args: Array<String>) {
 
         if (args.size > 1) {
-            println("Usage: java -jar pjd.jar <version>")
+            println("Usage: java -jar PaperJarDownloader.jar <version>")
             return
         }
 
