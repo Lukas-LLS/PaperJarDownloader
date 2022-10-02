@@ -26,10 +26,12 @@ object Main {
 
         if (version == "latest") {
             val versions = getVersions(client)
-            version = versions.filterNot { it.contains("pre") }.maxByOrNull {
-                val split = it.split(".")
-                split[0].toInt() * 100 + split[1].toInt() * 10 + runCatching { split[2].toInt() }.getOrElse { 0 }
-            } ?: ""
+            version = versions
+                .filterNot { it.contains("pre") }
+                .maxByOrNull {
+                    val split = it.split(".")
+                    split[0].toInt() * 100 + split[1].toInt() * 10 + runCatching { split[2].toInt() }.getOrElse { 0 }
+                } ?: ""
         }
 
         val latestBuild = getBuilds(client, version).maxOf { it }
@@ -70,7 +72,10 @@ object Main {
     private fun parseJSONArrayAttribute(json: String, attribute: String): List<String> {
         var index = json.indexOf("\"$attribute\":")
         index += attribute.length + 3
-        return json.substring(index).replace(Regex("[\\[\\]{}\"]|(\"$attribute\":)"), "").split(",")
+        return json
+            .substring(index)
+            .replace(Regex("[\\[\\]{}\"]|(\"$attribute\":)"), "")
+            .split(",")
     }
 
     private fun getVersionsUrl(): String {
