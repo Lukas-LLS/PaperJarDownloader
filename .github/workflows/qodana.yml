@@ -1,0 +1,16 @@
+name: Qodana Code Quality Check
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Qodana
+        uses: JetBrains/Qodana@v2022.2.2
