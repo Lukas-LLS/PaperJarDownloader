@@ -1,5 +1,5 @@
 name: Qodana Code Quality Check
-on: [push, pull_request]
+on: [ push ]
 
 jobs:
   analyze:
@@ -9,4 +9,4 @@ jobs:
         with:
           fetch-depth: 0
       - name: Run Qodana
-        uses: JetBrains/qodana-action@v2022.2.4
+        uses: JetBrains/qodana-action@v2022.3.4
