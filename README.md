@@ -13,7 +13,7 @@ To build PaperJarDownloader, you need to have the following installed:
 - [Maven](https://maven.apache.org/download.cgi)
 - [Docker](https://www.docker.com/products/docker-desktop/) (Optional)
 
-Once you have those installed, you can build PaperJarDownloader by running the following command in the project
+Once you have those installed, you can build the PaperJarDownloader by running the following command in the project
 directory
 
 ```bash
