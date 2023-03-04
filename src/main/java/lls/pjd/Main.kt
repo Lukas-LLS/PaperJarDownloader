@@ -36,9 +36,28 @@ object Main {
 
         val latestBuild = getBuilds(client, version).maxOf { it }
 
+        println("Downloading Paper version $version build $latestBuild")
+
         val latestBuildData = getSpecificBuild(client, version, latestBuild)
 
-        File("server.jar").writeBytes(latestBuildData)
+        println("Downloaded ${latestBuildData.size} bytes")
+        println("Writing to file")
+
+        val serverDir = File("server")
+
+        if (!serverDir.exists()) {
+            serverDir.mkdir()
+        }
+
+        val serverFile = serverDir.resolve("server.jar")
+
+        if (serverFile.exists()) {
+            serverFile.delete()
+        }
+
+        serverFile.writeBytes(latestBuildData)
+
+        println("Done")
     }
 
     private fun getSpecificBuild(client: HttpClient, version: String, build: Int): ByteArray {
