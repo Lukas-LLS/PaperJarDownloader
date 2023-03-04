@@ -8,7 +8,7 @@ RUN mkdir /app
 
 COPY start.sh /app/start.sh
 
-COPY target/PaperJarDownloader-1.0-SNAPSHOT-jar-with-dependencies /app/PaperJarDownloader.jar
+COPY target/PaperJarDownloader-1.0-SNAPSHOT-jar-with-dependencies.jar /app/PaperJarDownloader.jar
 
 RUN chmod +x /app/start.sh
 
