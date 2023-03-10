@@ -13,8 +13,6 @@ jobs:
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-        with:
-          platforms: 'linux/amd64,linux/arm64,linux/arm'
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -32,5 +30,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
+          platforms: 'linux/amd64,linux/arm64,linux/arm'
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/paper-jar-downloader:latest
