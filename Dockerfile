@@ -18,4 +18,4 @@ RUN chown -R server:server /app
 
 WORKDIR /app
 
-CMD ["bash", "su", "-c", "./start.sh", "server"]
+CMD ["su", "-c", "./start.sh", "server"]
