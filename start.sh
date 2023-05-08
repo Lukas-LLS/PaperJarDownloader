@@ -1,4 +1,4 @@
-su -c "java -jar ./PaperJarDownloader.jar" server
-su -c "cd ./server || exit" server
-su -c "echo eula=true > eula.txt" server
-su -c "java -jar ./server.jar nogui" server
+java -jar ./PaperJarDownloader.jar
+cd ./server || exit
+echo eula=true > eula.txt
+java -jar ./server.jar nogui
