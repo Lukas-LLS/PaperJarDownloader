@@ -1,5 +1,5 @@
-/opt/java/openjdk/bin/java -jar ./PaperJarDownloader.jar
-cd /app/server || exit
+export PATH=$PATH:/opt/java/openjdk/bin
+java -jar ./PaperJarDownloader.jar
+cd ./server || exit
 echo eula=true > eula.txt
-pwd
-/opt/java/openjdk/bin/java -jar ./server.jar nogui
+java -jar ./server.jar nogui
