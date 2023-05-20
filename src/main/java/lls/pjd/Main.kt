@@ -1,5 +1,6 @@
 package lls.pjd
 
+import org.slf4j.LoggerFactory
 import java.io.File
 import java.net.URI
 import java.net.http.HttpClient
@@ -11,8 +12,10 @@ object Main {
     @JvmStatic
     fun main(args: Array<String>) {
 
+        val logger = LoggerFactory.getLogger("PaperJarDownloader")
+
         if (args.size > 1) {
-            println("Usage: java -jar PaperJarDownloader.jar <version>")
+            logger.warn("Too many arguments")
             return
         }
 
@@ -36,28 +39,30 @@ object Main {
 
         val latestBuild = getBuilds(client, version).maxOf { it }
 
-        println("Downloading Paper version $version build $latestBuild")
+        logger.info("Downloading Paper version $version build $latestBuild")
 
         val latestBuildData = getSpecificBuild(client, version, latestBuild)
 
-        println("Downloaded ${latestBuildData.size} bytes")
-        println("Writing to file")
+        logger.info("Downloaded ${String.format("%.2f", latestBuildData.size / 1048576.0)} MB")
+        logger.info("Writing to file")
 
         val serverDir = File("server")
 
         if (!serverDir.exists()) {
+            logger.info("Creating server directory")
             serverDir.mkdir()
         }
 
         val serverFile = serverDir.resolve("server.jar")
 
         if (serverFile.exists()) {
+            logger.info("Deleting old server.jar")
             serverFile.delete()
         }
 
         serverFile.writeBytes(latestBuildData)
 
-        println("Done")
+        logger.info("Done")
     }
 
     private fun getSpecificBuild(client: HttpClient, version: String, build: Int): ByteArray {
