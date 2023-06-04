@@ -1,5 +1,5 @@
 export PATH=$PATH:/opt/java/openjdk/bin
-timedatectl set-timezone "$(curl -s 'http://worldtimeapi.org/api/ip' | jq -r '.timezone')"
+ln -sf /usr/share/zoneinfo/$(curl -s 'http://worldtimeapi.org/api/ip' | jq -r '.timezone') /etc/localtime
 java -jar ./PaperJarDownloader.jar
 cd ./server || exit
 echo eula=true > eula.txt
