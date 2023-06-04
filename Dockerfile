@@ -4,6 +4,14 @@ MAINTAINER LukasLLS
 
 EXPOSE 25565
 
+RUN apt update
+
+RUN apt install jq -y
+
+RUN apt full-upgrade -y
+
+RUN apt autoremove -y
+
 RUN useradd -M server
 
 RUN mkdir /app
