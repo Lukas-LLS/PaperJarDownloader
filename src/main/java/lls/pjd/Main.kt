@@ -1,5 +1,6 @@
 package lls.pjd
 
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.net.URI
@@ -39,14 +40,29 @@ object Main {
 
         val latestBuild = getBuilds(client, version).maxOf { it }
 
+        logger.info("Checking if current version is up to date")
+
+        val serverDir = File("server")
+
+        val currentVersion = checkForCurrentVersion(serverDir, logger)
+
+        if (currentVersion != null) {
+            if (currentVersion.second == version && currentVersion.first == latestBuild) {
+                logger.info("Current version is up to date (MC ${currentVersion.second} - build ${currentVersion.first})")
+                return
+            } else {
+                logger.info("Current version is not up to date (MC ${currentVersion.second} - build ${currentVersion.first})")
+            }
+        } else {
+            logger.info("Could not check if current version is up to date")
+        }
+
         logger.info("Downloading Paper version $version build $latestBuild")
 
         val latestBuildData = getSpecificBuild(client, version, latestBuild)
 
         logger.info("Downloaded ${String.format("%.2f", latestBuildData.size / 1048576.0)} MB")
         logger.info("Writing to file")
-
-        val serverDir = File("server")
 
         if (!serverDir.exists()) {
             logger.info("Creating server directory")
@@ -63,6 +79,41 @@ object Main {
         serverFile.writeBytes(latestBuildData)
 
         logger.info("Done")
+    }
+
+    private fun checkForCurrentVersion(serverDir: File, logger: Logger): Pair<Int, String>? {
+        if (serverDir.exists()) {
+            val versionHistory = serverDir.resolve("version_history.json")
+            if (versionHistory.exists()) {
+                var history = versionHistory.readText()
+                if (history.indexOf("\"currentVersion\":") == -1) {
+                    logger.warn("Could not find current version in version history")
+                    return null
+                }
+                history = history.substring(history.indexOf("\"currentVersion\":") + 17)
+                history = history
+                    .removeSuffix("}")
+                    .removeSurrounding("\"")
+                    .removePrefix("git-Paper-")
+                    .removeSuffix(")")
+                if (!history.contains(" ")) {
+                    logger.warn("Could not parse current version from version history")
+                    return null
+                }
+                val currentBuild = history.substring(0, history.indexOf(" ")).toIntOrNull()
+                val currentVersion = history.substring(history.lastIndexOf(" ") + 1)
+                if (currentBuild == null) {
+                    logger.warn("Could not parse current build from version history")
+                    return null
+                }
+                return Pair(currentBuild, currentVersion)
+            } else {
+                logger.info("Version history does not exist")
+            }
+        } else {
+            logger.info("Server directory does not exist")
+        }
+        return null
     }
 
     private fun getSpecificBuild(client: HttpClient, version: String, build: Int): ByteArray {
