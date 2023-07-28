@@ -45,7 +45,7 @@ java -jar PaperJarDownloader.jar <version>
 ### Docker
 
 If you want to use the Docker image, you can skip the building step.
-The docker image is avaiable on [Docker Hub](https://hub.docker.com/r/lukaslls/paper-jar-downloader).
+The docker image is available on [Docker Hub](https://hub.docker.com/r/lukaslls/paper-jar-downloader).
 You can run the image as a docker container by running the following command.
 
 ```bash
