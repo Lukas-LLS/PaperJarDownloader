@@ -30,6 +30,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: 'linux/amd64,linux/arm64/v8,linux/ppc64le,windows/amd64'
+          platforms: 'linux/amd64,linux/arm64/v8,linux/ppc64le'
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/paper-jar-downloader:latest
