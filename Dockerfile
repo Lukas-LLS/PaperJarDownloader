@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:21-jre
 
 MAINTAINER LukasLLS
 
@@ -18,7 +18,7 @@ RUN mkdir /app
 
 COPY start.sh /app/start.sh
 
-COPY target/PaperJarDownloader-2.1.0-jar-with-dependencies.jar /app/PaperJarDownloader.jar
+COPY target/PaperJarDownloader-2.2.0-jar-with-dependencies.jar /app/PaperJarDownloader.jar
 
 RUN chmod +x /app/start.sh
 
