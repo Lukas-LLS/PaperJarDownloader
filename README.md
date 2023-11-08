@@ -9,7 +9,7 @@ If a specific version is specified, it will download that version instead.
 
 To build PaperJarDownloader, you need to have the following installed:
 
-- [Java 17](https://www.oracle.com/java/technologies/downloads/#java17)
+- [Java 21](https://www.oracle.com/java/technologies/downloads/#java21)
 - [Maven](https://maven.apache.org/download.cgi)
 - [Docker](https://www.docker.com/products/docker-desktop/) (Optional)
 
@@ -58,7 +58,7 @@ This directory will contain the server files.
 ## Noteworthy
 
 Depending on your minecraft version, you might need a different version of Java.
-The required Java version for every version from 1.17.1 to 1.20.1 is Java 17.
-Versions below 1.17.1 require a lower Java version.
+The required Java version for every version from 1.18.2 to 1.20.2 is Java 21.
+Versions below 1.18.2 require a lower Java version.
 
-The docker image uses Java 17 by default and will automatically download the latest version.
+The docker image uses Java 21 by default and will automatically download the latest version.
