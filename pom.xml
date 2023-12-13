@@ -12,6 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.compiler.jvmTarget>21</kotlin.compiler.jvmTarget>
         <kotlinVersion>1.9.21</kotlinVersion>
+        <ktorVersion>2.3.7</ktorVersion>
     </properties>
 
     <build>
@@ -72,13 +73,22 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlinVersion}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-maven-plugin</artifactId>
             <version>${kotlinVersion}</version>
             <type>maven-plugin</type>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-client-core-jvm</artifactId>
+            <version>${ktorVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-client-cio-jvm</artifactId>
+            <version>${ktorVersion}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>

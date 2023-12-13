@@ -1,12 +1,13 @@
 package lls.pjd
 
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import kotlinx.coroutines.runBlocking
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.File
-import java.net.URI
-import java.net.http.HttpClient
-import java.net.http.HttpRequest
-import java.net.http.HttpResponse
 
 object Main {
 
@@ -26,10 +27,13 @@ object Main {
             "latest"
         }
 
-        val client = HttpClient.newHttpClient()
+        val client = HttpClient(CIO)
 
         if (version == "latest") {
-            val versions = getVersions(client)
+            val versions: List<String>
+            runBlocking {
+                versions = getVersions(client)
+            }
             version = versions
                 .filterNot { it.contains("pre") }
                 .maxByOrNull {
@@ -38,7 +42,11 @@ object Main {
                 } ?: ""
         }
 
-        val latestBuild = getBuilds(client, version).maxOf { it }
+        val latestBuild: Int
+
+        runBlocking {
+            latestBuild = getBuilds(client, version).maxOf { it }
+        }
 
         logger.info("Checking if current version is up to date")
 
@@ -59,7 +67,11 @@ object Main {
 
         logger.info("Downloading Paper version $version build $latestBuild")
 
-        val latestBuildData = getSpecificBuild(client, version, latestBuild)
+        val latestBuildData: ByteArray
+
+        runBlocking {
+            latestBuildData = getSpecificBuild(client, version, latestBuild)
+        }
 
         logger.info("Downloaded ${String.format("%.2f", latestBuildData.size / 1048576.0)} MB")
         logger.info("Writing to file")
@@ -116,32 +128,17 @@ object Main {
         return null
     }
 
-    private fun getSpecificBuild(client: HttpClient, version: String, build: Int): ByteArray {
-        val response = client.send(
-            HttpRequest.newBuilder(URI.create(getSpecificBuildUrl(version, build))).build(),
-            HttpResponse.BodyHandlers.ofInputStream()
-        )
-        try {
-            return response.body().readBytes()
-        } finally {
-            response.body().close()
-        }
+    private suspend fun getSpecificBuild(client: HttpClient, version: String, build: Int): ByteArray {
+        return client.get(getSpecificBuildUrl(version, build)).readBytes()
     }
 
-    private fun getVersions(client: HttpClient): List<String> {
-        val response = client.send(
-            HttpRequest.newBuilder(URI.create(getVersionsUrl())).build(),
-            HttpResponse.BodyHandlers.ofString()
-        )
-        return parseJSONArrayAttribute(response.body(), "versions")
+    private suspend fun getVersions(client: HttpClient): List<String> {
+        return parseJSONArrayAttribute(client.get(getVersionsUrl()).bodyAsText(), "versions")
     }
 
-    private fun getBuilds(client: HttpClient, version: String): List<Int> {
-        val response = client.send(
-            HttpRequest.newBuilder(URI.create(getBuildsUrl(version))).build(),
-            HttpResponse.BodyHandlers.ofString()
-        )
-        return parseJSONArrayAttribute(response.body(), "builds").map { it.toInt() }
+    private suspend fun getBuilds(client: HttpClient, version: String): List<Int> {
+        val response = client.get(getBuildsUrl(version))
+        return parseJSONArrayAttribute(response.bodyAsText(), "builds").map { it.toInt() }
     }
 
     private fun parseJSONArrayAttribute(json: String, attribute: String): List<String> {
