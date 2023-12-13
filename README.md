@@ -25,7 +25,7 @@ mvn package
 ### Direct
 
 Copy the output jar file from the `target` directory
-(it should be named something like `PaperJarDownloader-1.0-SNAPSHOT-jar-with-dependencies.jar`)
+(it should be named something like `PaperJarDownloader-2.2.0-jar-with-dependencies.jar`)
 to the directory you want to run PaperJarDownloader from.
 Make sure that the jar file is named `PaperJarDownloader.jar`.
 Then, run the following commands to download the latest version of the PaperMC server jar file and start the server.
