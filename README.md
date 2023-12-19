@@ -1,5 +1,7 @@
 # PaperJarDownloader
 
+[![Upload to Docker Hub](https://github.com/Lukas-LLS/PaperJarDownloader/actions/workflows/docker.yml/badge.svg)](https://github.com/Lukas-LLS/PaperJarDownloader/actions/workflows/docker.yml)
+
 ## Introduction
 
 PaperJarDownloader is a tool to automatically download the latest version of the PaperMC server jar file.
