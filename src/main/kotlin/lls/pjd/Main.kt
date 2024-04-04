@@ -118,7 +118,7 @@ object Main {
                     logger.warn("Could not parse current build from version history")
                     return null
                 }
-                return Pair(currentBuild, currentVersion)
+                return currentBuild to currentVersion
             } else {
                 logger.info("Version history does not exist")
             }
