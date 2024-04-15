@@ -1,6 +1,9 @@
 name: Qodana Code Quality Check
 
-on: [ push ]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   analyze:
