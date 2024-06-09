@@ -1,3 +1,4 @@
+#file: noinspection SpellCheckingInspection
 name: Upload to Docker Hub
 on:
   push:
@@ -36,5 +37,6 @@ jobs:
         with:
           context: .
           platforms: 'linux/amd64,linux/arm64/v8,linux/ppc64le'
+          sbom: true
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/paper-jar-downloader:latest
