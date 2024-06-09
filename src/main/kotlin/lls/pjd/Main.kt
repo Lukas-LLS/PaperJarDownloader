@@ -106,6 +106,16 @@ object Main {
                 history = history
                     .removeSuffix("}")
                     .removeSurrounding("\"")
+
+                if (!history.startsWith("git-Paper-")) { // New version history format
+                    val elements = history
+                        .split("-")
+                        .take(2)
+
+                    return elements[1].toInt() to elements[0]
+                }
+
+                history = history // Old version history format
                     .removePrefix("git-Paper-")
                     .removeSuffix(")")
                 if (!history.contains(" ")) {
