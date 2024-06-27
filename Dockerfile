@@ -1,8 +1,8 @@
 # Use the Eclipse Temurin JRE 21 as the base image
 FROM eclipse-temurin:21-jre
 
-# Set the maintainer of the image
-MAINTAINER LukasLLS
+# Set the author of the image
+LABEL org.opencontainers.image.authors="LukasLLS"
 
 # Expose port 25565 for external connections
 EXPOSE 25565
