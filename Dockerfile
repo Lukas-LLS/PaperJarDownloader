@@ -19,6 +19,11 @@ RUN apt-get full-upgrade -y
 # Remove unnecessary packages
 RUN apt-get autoremove -y
 
+# Clear package cache to reduce image size
+RUN apt-get clean
+
+RUN rm -rf /var/lib/apt/lists/*
+
 # Create a new user named 'server' without a home directory
 RUN useradd -M server
 
