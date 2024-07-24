@@ -11,13 +11,13 @@ EXPOSE 25565
 RUN apt update
 
 # Install the jq package (used for parsing JSON)
-RUN apt install jq -y
+RUN apt-get install jq -y
 
 # Upgrade all packages
-RUN apt full-upgrade -y
+RUN apt-get full-upgrade -y
 
 # Remove unnecessary packages
-RUN apt autoremove -y
+RUN apt-get autoremove -y
 
 # Create a new user named 'server' without a home directory
 RUN useradd -M server
