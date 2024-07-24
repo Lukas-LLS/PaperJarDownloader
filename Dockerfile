@@ -7,22 +7,13 @@ LABEL org.opencontainers.image.authors="LukasLLS"
 # Expose port 25565 for external connections
 EXPOSE 25565
 
-# Update the package lists
-RUN apt-get update
-
-# Install the jq package (used for parsing JSON)
-RUN apt-get install jq -y
-
-# Upgrade all packages
-RUN apt-get full-upgrade -y
-
-# Remove unnecessary packages
-RUN apt-get autoremove -y
-
-# Clear package cache to reduce image size
-RUN apt-get clean
-
-RUN rm -rf /var/lib/apt/lists/*
+# Update the package lists, install jq, upgrade all packages, remove unnecessary packages, and clear package cache
+RUN apt-get update && \
+    apt-get install jq -y && \
+    apt-get full-upgrade -y && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Create a new user named 'server' without a home directory
 RUN useradd -M server
