@@ -8,7 +8,7 @@ LABEL org.opencontainers.image.authors="LukasLLS"
 EXPOSE 25565
 
 # Update the package lists
-RUN apt update
+RUN apt-get update
 
 # Install the jq package (used for parsing JSON)
 RUN apt-get install jq -y
