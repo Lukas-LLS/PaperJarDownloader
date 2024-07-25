@@ -15,9 +15,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Create a new user named 'server' without a home directory
-RUN useradd -M server
-
 # Create a directory for the application
 RUN mkdir /app
 
@@ -30,14 +27,14 @@ COPY target/PaperJarDownloader-2.2.0-jar-with-dependencies.jar /app/PaperJarDown
 # Make the start script executable
 RUN chmod +x /app/start.sh
 
-# Change the ownership of the /app directory to the 'server' user
-RUN chown -R server:server /app
+# Change the ownership of the /app directory to the 'ubuntu' user
+RUN chown -R ubuntu:ubuntu /app
 
 # Set the working directory to /app
 WORKDIR /app
 
-# Switch to the 'server' user
-USER server
+# Switch to the 'ubuntu' user
+USER ubuntu
 
 # Set the start script as the entrypoint
 CMD ["./start.sh"]
