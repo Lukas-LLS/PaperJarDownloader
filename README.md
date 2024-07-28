@@ -1,6 +1,7 @@
 # PaperJarDownloader
 
 [![Upload to Docker Hub](https://github.com/Lukas-LLS/PaperJarDownloader/actions/workflows/docker.yml/badge.svg)](https://github.com/Lukas-LLS/PaperJarDownloader/actions/workflows/docker.yml)
+[![CodeFactor](https://www.codefactor.io/repository/github/lukas-lls/paperjardownloader/badge)](https://www.codefactor.io/repository/github/lukas-lls/paperjardownloader)
 
 ## Introduction
 
