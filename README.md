@@ -61,7 +61,7 @@ This directory will contain the server files.
 ## Noteworthy
 
 Depending on your minecraft version, you might need a different version of Java.
-The required Java version for every version from 1.18.2 to 1.20.6 is Java 21.
+The required Java version for every version from 1.18.2 to 1.21.1 is Java 21.
 Versions below 1.18.2 require a lower Java version.
 
 The docker image uses Java 21 by default and will automatically download the latest version.
