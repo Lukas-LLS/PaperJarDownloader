@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  upload-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
