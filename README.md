@@ -52,7 +52,7 @@ The docker image is available on [Docker Hub](https://hub.docker.com/r/lukaslls/
 You can run the image as a docker container by running the following command.
 
 ```bash
-docker run -it --rm -p "25565:25565" -v "$(pwd)/server:/app/server" lukaslls/paper-jar-downloader
+docker run -it --rm -p "25565:25565" -v "$(pwd)/server:/app/server" lukaslls/paper-jar-downloader:latest
 ```
 
 Note that this will create a directory called `server` in the current directory.
