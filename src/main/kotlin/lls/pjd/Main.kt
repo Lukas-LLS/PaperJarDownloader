@@ -139,7 +139,7 @@ object Main {
     }
 
     private suspend fun getSpecificBuild(client: HttpClient, version: String, build: Int): ByteArray {
-        return client.get(getSpecificBuildUrl(version, build)).readBytes()
+        return client.get(getSpecificBuildUrl(version, build)).readRawBytes()
     }
 
     private suspend fun getVersions(client: HttpClient): List<String> {
