@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 export PATH=$PATH:/opt/java/openjdk/bin
 TZ=$(curl -s 'http://worldtimeapi.org/api/ip' | jq -r '.timezone')
 export TZ
