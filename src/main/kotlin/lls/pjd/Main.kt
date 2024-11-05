@@ -24,7 +24,7 @@ object Main {
         var version = if (args.isNotEmpty()) {
             args[0]
         } else {
-            "latest"
+            System.getenv("PAPER_VERSION") ?: "latest"
         }
 
         val client = HttpClient(CIO)
@@ -42,10 +42,15 @@ object Main {
                 } ?: ""
         }
 
-        val latestBuild: Int
+        val latestBuild: Int?
 
         runBlocking {
-            latestBuild = getBuilds(client, version).maxOf { it }
+            latestBuild = getBuilds(client, version).maxOfOrNull { it }
+        }
+
+        latestBuild ?: run {
+            logger.error("Could not get latest build for version $version")
+            return
         }
 
         logger.info("Checking if current version is up to date")
