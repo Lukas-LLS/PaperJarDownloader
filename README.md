@@ -67,6 +67,12 @@ docker run -it --rm -p "25565:25565" -v "$(pwd)/server:/app/server" lukaslls/pap
 Note that this will create a directory called `server` in the current directory.
 This directory will contain the server files.
 
+If you want to specify a version, you can run the following command.
+
+```bash
+docker run -it --rm -p "25565:25565" -v "$(pwd)/server:/app/server" -e "PAPER_VERSION=1.18.2" lukaslls/paper-jar-downloader:latest
+```
+
 ## Noteworthy
 
 Depending on your minecraft version, you might need a different version of Java.
