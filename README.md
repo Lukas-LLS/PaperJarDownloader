@@ -76,7 +76,7 @@ docker run -it --rm -p "25565:25565" -v "$(pwd)/server:/app/server" -e "PAPER_VE
 ## Noteworthy
 
 Depending on your minecraft version, you might need a different version of Java.
-The required Java version for every version from 1.18.2 to 1.21.1 is Java 21.
+The required Java version for every version from 1.18.2 to 1.21.4 is Java 21.
 Versions below 1.18.2 require a lower Java version.
 
 The docker image uses Java 21 by default and will automatically download the latest version.
