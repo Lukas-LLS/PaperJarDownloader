@@ -24,7 +24,7 @@ object Main {
         var version = if (args.isNotEmpty()) {
             args[0]
         } else {
-            System.getenv("PAPER_VERSION") ?: "latest"
+            System.getenv("MC_VERSION") ?: "latest"
         }
 
         val client = HttpClient(CIO)

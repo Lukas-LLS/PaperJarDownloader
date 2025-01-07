@@ -45,12 +45,12 @@ If you want to download a specific version of the PaperMC server jar file, run t
 java -jar PaperJarDownloader.jar <version>
 ```
 
-Alternatively to specifying the version, you can also specify an environment variable called `PAPER_VERSION`.
+Alternatively to specifying the version, you can also specify an environment variable called `MC_VERSION`.
 
 For example, to download version 1.18.2, you can run the following command.
 
 ```bash
-export PAPER_VERSION=1.18.2
+export MC_VERSION=1.18.2
 java -jar PaperJarDownloader.jar
 ```
 
@@ -70,7 +70,7 @@ This directory will contain the server files.
 If you want to specify a version, you can run the following command.
 
 ```bash
-docker run -it --rm -p "25565:25565" -v "$(pwd)/server:/app/server" -e "PAPER_VERSION=1.18.2" lukaslls/paper-jar-downloader:latest
+docker run -it --rm -p "25565:25565" -v "$(pwd)/server:/app/server" -e "MC_VERSION=1.18.2" lukaslls/paper-jar-downloader:latest
 ```
 
 ## Noteworthy
