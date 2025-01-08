@@ -49,6 +49,8 @@ export MC_VERSION=1.18.2
 java -jar PaperJarDownloader.jar
 ```
 
+### Variant - Folia
+
 Likewise, you can set the environment variable `FOLIA` (Any value works, as long as the variable is set) to download the
 latest version of Folia instead of Paper.
 
