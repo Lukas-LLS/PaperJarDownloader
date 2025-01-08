@@ -39,18 +39,21 @@ java -jar PaperJarDownloader.jar
 java -jar server/server.jar nogui
 ```
 
-If you want to download a specific version of the PaperMC server jar file, run the following command.
-
-```bash
-java -jar PaperJarDownloader.jar <version>
-```
-
-Alternatively to specifying the version, you can also specify an environment variable called `MC_VERSION`.
+If you want to download a specific version of the PaperMC server jar file, specify an environment variable called
+`MC_VERSION`.
 
 For example, to download version 1.18.2, you can run the following command.
 
 ```bash
 export MC_VERSION=1.18.2
+java -jar PaperJarDownloader.jar
+```
+
+Likewise, you can set the environment variable `FOLIA` (Any value works, as long as the variable is set) to download the
+latest version of Folia instead of Paper.
+
+```bash
+export FOLIA=true
 java -jar PaperJarDownloader.jar
 ```
 
