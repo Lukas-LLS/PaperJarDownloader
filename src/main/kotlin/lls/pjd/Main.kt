@@ -16,23 +16,21 @@ object Main {
 
         val logger = LoggerFactory.getLogger("PaperJarDownloader")
 
-        if (args.size > 1) {
-            logger.warn("Too many arguments")
-            return
+        if (args.isNotEmpty()) {
+            logger.warn("This application does not take any arguments")
+            logger.warn("If you wish to specify any program behavior please set the environment variables MC_VERSION and FOLIA accordingly")
         }
 
-        var version = if (args.isNotEmpty()) {
-            args[0]
-        } else {
-            System.getenv("PAPER_VERSION") ?: "latest"
-        }
+        var version = System.getenv("MC_VERSION") ?: "latest"
+
+        var folia = System.getenv("FOLIA") != null
 
         val client = HttpClient(CIO)
 
         if (version == "latest") {
             val versions: List<String>
             runBlocking {
-                versions = getVersions(client)
+                versions = getVersions(client, folia)
             }
             version = versions
                 .filterNot { it.contains("pre") }
@@ -45,11 +43,11 @@ object Main {
         val latestBuild: Int?
 
         runBlocking {
-            latestBuild = getBuilds(client, version).maxOfOrNull { it }
+            latestBuild = getBuilds(folia, client, version).maxOfOrNull { it }
         }
 
         latestBuild ?: run {
-            logger.error("Could not get latest build for version $version")
+            logger.error("Could not get latest build for version $version (${getProject(folia, true)})")
             return
         }
 
@@ -61,21 +59,35 @@ object Main {
 
         if (currentVersion != null) {
             if (currentVersion.second == version && currentVersion.first == latestBuild) {
-                logger.info("Current version is up to date (MC ${currentVersion.second} - build ${currentVersion.first})")
+                logger.info(
+                    "Current version is up to date (${
+                        getProject(
+                            folia,
+                            true
+                        )
+                    } - MC ${currentVersion.second} - build ${currentVersion.first})"
+                )
                 return
             } else {
-                logger.info("Current version is not up to date (MC ${currentVersion.second} - build ${currentVersion.first})")
+                logger.info(
+                    "Current version is not up to date (${
+                        getProject(
+                            folia,
+                            true
+                        )
+                    } - MC ${currentVersion.second} - build ${currentVersion.first})"
+                )
             }
         } else {
             logger.info("Could not check if current version is up to date")
         }
 
-        logger.info("Downloading Paper version $version build $latestBuild")
+        logger.info("Downloading ${getProject(folia, true)} version $version build $latestBuild")
 
         val latestBuildData: ByteArray
 
         runBlocking {
-            latestBuildData = getSpecificBuild(client, version, latestBuild)
+            latestBuildData = getSpecificBuild(client, folia, version, latestBuild)
         }
 
         logger.info("Downloaded ${String.format("%.2f", latestBuildData.size / 1048576.0)} MB")
@@ -107,12 +119,13 @@ object Main {
                     logger.warn("Could not find current version in version history")
                     return null
                 }
-                history = history.substring(history.indexOf("\"currentVersion\":") + 17)
+                history =
+                    history.substring(history.indexOf("\"currentVersion\":") + 17) // 17 is the length of: "currentVersion":
                 history = history
                     .removeSuffix("}")
                     .removeSurrounding("\"")
 
-                if (!history.startsWith("git-Paper-")) { // New version history format
+                if (!history.startsWith("git-Paper-")) { // New version history format - without prefix
                     val elements = history
                         .split("-")
                         .take(2)
@@ -143,16 +156,16 @@ object Main {
         return null
     }
 
-    private suspend fun getSpecificBuild(client: HttpClient, version: String, build: Int): ByteArray {
-        return client.get(getSpecificBuildUrl(version, build)).readRawBytes()
+    private suspend fun getSpecificBuild(client: HttpClient, folia: Boolean, version: String, build: Int): ByteArray {
+        return client.get(getSpecificBuildUrl(folia, version, build)).readRawBytes()
     }
 
-    private suspend fun getVersions(client: HttpClient): List<String> {
-        return parseJSONArrayAttribute(client.get(getVersionsUrl()).bodyAsText(), "versions")
+    private suspend fun getVersions(client: HttpClient, folia: Boolean): List<String> {
+        return parseJSONArrayAttribute(client.get(getVersionsUrl(folia)).bodyAsText(), "versions")
     }
 
-    private suspend fun getBuilds(client: HttpClient, version: String): List<Int> {
-        val response = client.get(getBuildsUrl(version))
+    private suspend fun getBuilds(folia: Boolean, client: HttpClient, version: String): List<Int> {
+        val response = client.get(getBuildsUrl(folia, version))
         return parseJSONArrayAttribute(response.bodyAsText(), "builds").map { it.toInt() }
     }
 
@@ -165,16 +178,36 @@ object Main {
             .split(",")
     }
 
-    private fun getVersionsUrl(): String {
-        return "https://papermc.io/api/v2/projects/paper"
+    private fun getVersionsUrl(folia: Boolean): String {
+        return "https://api.papermc.io/v2/projects/" + getProject(folia)
     }
 
-    private fun getBuildsUrl(version: String): String {
-        return "https://papermc.io/api/v2/projects/paper/versions/$version"
+    private fun getBuildsUrl(folia: Boolean, version: String): String {
+        return "https://api.papermc.io/v2/projects/${getProject(folia)}/versions/$version"
     }
 
-    private fun getSpecificBuildUrl(version: String, build: Int): String {
-        return "https://papermc.io/api/v2/projects/paper/versions/$version/builds/$build/downloads/paper-$version-$build.jar"
+    private fun getSpecificBuildUrl(folia: Boolean, version: String, build: Int): String {
+        return "https://api.papermc.io/v2/projects/${getProject(folia)}/versions/$version/builds/$build/downloads/${
+            getProject(
+                folia
+            )
+        }-$version-$build.jar"
+    }
+
+    private fun getProject(folia: Boolean, capitalized: Boolean = false): String {
+        return if (capitalized) {
+            if (folia) {
+                "Folia"
+            } else {
+                "Paper"
+            }
+        } else {
+            if (folia) {
+                "folia"
+            } else {
+                "paper"
+            }
+        }
     }
 
 }
