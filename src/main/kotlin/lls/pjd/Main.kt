@@ -23,7 +23,7 @@ object Main {
 
         var version = System.getenv("MC_VERSION") ?: "latest"
 
-        var folia = System.getenv("FOLIA") != null
+        val folia = System.getenv("FOLIA") != null
 
         val client = HttpClient(CIO)
 
