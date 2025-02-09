@@ -20,4 +20,5 @@ echo "Timezone is $TZ"
 java -jar ./PaperJarDownloader.jar
 cd ./server || exit
 echo eula=true > eula.txt
+
 java -jar -XX:+UseZGC -XX:+ZGenerational ./server.jar nogui
