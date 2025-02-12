@@ -7,7 +7,7 @@ LABEL org.opencontainers.image.authors="LukasLLS"
 # Expose port 25565 for external connections
 EXPOSE 25565
 
-# Update the package lists, install jq, upgrade all packages, remove unnecessary packages, and clear package cache
+# Update the package lists, install jq and clear package cache
 RUN apt-get update && \
     apt-get install jq -y && \
     apt-get clean && \
