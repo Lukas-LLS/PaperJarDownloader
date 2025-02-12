@@ -10,8 +10,6 @@ EXPOSE 25565
 # Update the package lists, install jq, upgrade all packages, remove unnecessary packages, and clear package cache
 RUN apt-get update && \
     apt-get install jq -y && \
-    apt-get full-upgrade -y && \
-    apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
