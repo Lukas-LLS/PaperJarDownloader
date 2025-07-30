@@ -12,7 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.compiler.jvmTarget>21</kotlin.compiler.jvmTarget>
         <kotlinVersion>2.2.0</kotlinVersion>
-        <ktorVersion>3.2.2</ktorVersion>
+        <ktorVersion>3.2.3</ktorVersion>
     </properties>
 
     <build>
