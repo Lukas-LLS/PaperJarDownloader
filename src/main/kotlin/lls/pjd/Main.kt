@@ -140,7 +140,7 @@ object Main {
                     logger.warn("Could not parse current version from version history")
                     return null
                 }
-                val currentBuild = history.substring(0, history.indexOf(" ")).toIntOrNull()
+                val currentBuild = history.substringBefore(" ").toIntOrNull()
                 val currentVersion = history.substring(history.lastIndexOf(" ") + 1)
                 if (currentBuild == null) {
                     logger.warn("Could not parse current build from version history")
