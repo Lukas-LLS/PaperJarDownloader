@@ -1,6 +1,6 @@
 name: Java CI - Build
-
-# On pull request and push except to master
+permissions:
+  contents: read
 on:
   pull_request:
   push:
