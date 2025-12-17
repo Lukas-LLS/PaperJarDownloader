@@ -1,5 +1,6 @@
 name: Qodana Code Quality Check
-
+permissions:
+  contents: read
 on:
   push:
     branches:
