@@ -125,7 +125,7 @@ object Main {
                     .removeSuffix("}")
                     .removeSurrounding("\"")
 
-                if (!history.startsWith("git-Paper-")) { // New version history format - without prefix
+                if (!history.startsWith("git-Paper-")) { // New version history format - without a prefix
                     val elements = history
                         .split("-")
                         .take(2)
