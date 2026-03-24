@@ -1,5 +1,5 @@
-# Use the Eclipse Temurin JRE 21 as the base image
-FROM eclipse-temurin:21-jre
+# Use the Eclipse Temurin JRE 25 as the base image
+FROM eclipse-temurin:25-jre
 
 # Set the author of the image
 LABEL org.opencontainers.image.authors="LukasLLS"
