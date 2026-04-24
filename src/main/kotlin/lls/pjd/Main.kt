@@ -166,7 +166,7 @@ object Main {
 
     private suspend fun getBuilds(folia: Boolean, client: HttpClient, version: String): List<Int> {
         val response = client.get(getBuildsUrl(folia, version))
-        return parseJSONArrayAttribute(response.bodyAsText(), "builds").map { it.toInt() }
+        return parseJSONArrayAttribute(response.bodyAsText(), "builds").mapNotNull { it.toIntOrNull() }
     }
 
     private fun parseJSONArrayAttribute(json: String, attribute: String): List<String> {
