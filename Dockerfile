@@ -9,7 +9,7 @@ EXPOSE 25565
 
 # Update the package lists, install jq and clear package cache
 RUN apt-get update && \
-    apt-get install jq -y && \
+    apt-get install curl jq -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
