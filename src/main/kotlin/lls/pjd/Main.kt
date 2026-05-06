@@ -45,6 +45,7 @@ object Main {
 
         latestBuild ?: run {
             logger.error("Could not get latest build for version $version (${Downloader.getProject(folia, true)})")
+            KtorUtil.close()
             return
         }
 
@@ -64,6 +65,7 @@ object Main {
                         )
                     } - MC ${currentVersion.second} - build ${currentVersion.first})"
                 )
+                KtorUtil.close()
                 return
             } else {
                 logger.info(
@@ -85,6 +87,12 @@ object Main {
 
         runBlocking {
             latestBuildData = downloader.getSpecificBuild(folia, version, latestBuild)
+        }
+
+        if (latestBuildData.isEmpty()) {
+            logger.error("Could not download build")
+            KtorUtil.close()
+            return
         }
 
         logger.info("Downloaded ${String.format("%.2f", latestBuildData.size / 1048576.0)} MB")

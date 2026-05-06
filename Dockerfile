@@ -20,7 +20,7 @@ RUN mkdir /app
 COPY start.sh /app/start.sh
 
 # Copy the application JAR file to the /app directory
-COPY build/libs/PaperJarDownloader-3.0.0-all.jar /app/PaperJarDownloader.jar
+COPY build/libs/PaperJarDownloader-*-all.jar /app/PaperJarDownloader.jar
 
 # Make the start script executable
 RUN chmod +x /app/start.sh

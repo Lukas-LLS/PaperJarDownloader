@@ -1,6 +1,6 @@
 query GetVersions($projectKey: String!) {
     project(key: $projectKey) {
-        versions(first: 100) {
+        versions(last: 100) {
             nodes {
                 key
             }

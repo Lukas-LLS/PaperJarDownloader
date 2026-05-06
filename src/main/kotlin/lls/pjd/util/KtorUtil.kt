@@ -8,10 +8,19 @@ import io.ktor.client.statement.*
 object KtorUtil {
 
     private val client = HttpClient(CIO)
+    val userAgent = "User-Agent" to "PaperJarDownloader/3.0 (https://github.com/Lukas-LLS/PaperJarDownloader)"
 
-    suspend fun getBytes(url: String) = client.get(url).readRawBytes()
+    suspend fun getBytes(url: String) = client
+        .get(url) {
+            header(userAgent.first, userAgent.second)
+        }
+        .readRawBytes()
 
-    suspend fun getBodyAsText(url: String) = client.get(url).bodyAsText()
+    suspend fun getBodyAsText(url: String) = client
+        .get(url) {
+            header(userAgent.first, userAgent.second)
+        }
+        .bodyAsText()
 
     fun close() = client.close()
 
