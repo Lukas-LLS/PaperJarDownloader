@@ -11,10 +11,7 @@ object GraphQLDownloader : Downloader {
     private val client = ApolloClient
         .Builder()
         .serverUrl("https://fill.papermc.io/graphql")
-        .addHttpHeader(
-            "User-Agent",
-            "PaperJarDownloader/3.0 (https://github.com/Lukas-LLS/PaperJarDownloader)"
-        )
+        .addHttpHeader(KtorUtil.userAgent.first, KtorUtil.userAgent.second)
         .build()
 
     override suspend fun getSpecificBuild(
@@ -35,8 +32,8 @@ object GraphQLDownloader : Downloader {
             ?.build
             ?.downloads
             .orEmpty()
-            .firstNotNullOf { it.url }
-            .let { KtorUtil.getBytes(it) }
+            .lastOrNull()
+            ?.let { KtorUtil.getBytes(it.url) } ?: ByteArray(0)
     }
 
     override suspend fun getVersions(folia: Boolean): List<String> {

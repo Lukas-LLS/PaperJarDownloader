@@ -80,11 +80,11 @@ docker run -it --rm -p "25565:25565" -v "$(pwd)/server:/app/server" -e "MC_VERSI
 
 ## Table of Environment Variables
 
-| Name              | Description                                                                                                                      | Default        |
-|-------------------|----------------------------------------------------------------------------------------------------------------------------------|----------------|
-| MC_VERSION        | The version of the PaperMC server jar file to download, i.e. '1.18.2'                                                            | latest         |
-| FOLIA             | Whether to download Folia instead of Paper, either 'true', or 'false'                                                            | false          |
-| LEGACY_DOWNLOADER | Whether to use the legacy REST downloader instead of the GraphQL downloader (not recommended), either 'true' or 'false'/\<unset> | \<unset>/false |
+| Name              | Description                                                                                                              | Default  |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------|----------|
+| MC_VERSION        | The version of the PaperMC server jar file to download, i.e. '1.18.2'                                                    | latest   |
+| FOLIA             | Whether to download Folia instead of Paper, either 'true', or \<unset>                                                   | \<unset> |
+| LEGACY_DOWNLOADER | Whether to use the legacy REST downloader instead of the GraphQL downloader (not recommended), either 'true' or \<unset> | \<unset> |
 
 ## Noteworthy
 

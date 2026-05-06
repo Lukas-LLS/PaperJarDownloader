@@ -14,12 +14,8 @@ interface Downloader {
     companion object {
         fun selectDownloader(): Downloader {
             System.getenv("LEGACY_DOWNLOADER")?.let {
-                return if (it.toBoolean()) {
-                    @Suppress("DEPRECATION")
-                    RestDownloader
-                } else {
-                    GraphQLDownloader
-                }
+                @Suppress("DEPRECATION")
+                return RestDownloader
             }
             return GraphQLDownloader
         }
