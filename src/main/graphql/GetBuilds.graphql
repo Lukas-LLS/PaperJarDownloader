@@ -1,0 +1,12 @@
+query GetBuilds($projectId: String!, $version: String!) {
+    project(key: $projectId) {
+        version(key: $version) {
+            builds(first: 100) {
+                nodes {
+                    id
+                    number
+                }
+            }
+        }
+    }
+}

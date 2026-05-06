@@ -1,0 +1,11 @@
+query GetBuildUrl($projectId: String!, $version: String!, $buildNumber: Int!) {
+    project(key: $projectId) {
+        version(key: $version) {
+            build(number: $buildNumber) {
+                downloads {
+                    url
+                }
+            }
+        }
+    }
+}
