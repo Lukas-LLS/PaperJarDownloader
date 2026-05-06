@@ -13,22 +13,22 @@ If a specific version is specified, it will download that version instead.
 To build PaperJarDownloader, you need to have the following installed:
 
 - [Java 25](https://www.oracle.com/java/technologies/downloads/#java25)
-- [Maven](https://maven.apache.org/download.cgi)
 - [Docker](https://www.docker.com/products/docker-desktop/) (Optional)
 
-Once you have those installed, you can build the PaperJarDownloader by running the following command in the project
+Once you have Java installed, you can build the PaperJarDownloader by running the following command in the project
 directory
 
 ```bash
-mvn package
+chmod +x ./gradlew
+./gradlew shadowJar
 ```
 
 ## Usage
 
 ### Direct
 
-Copy the output jar file from the `target` directory
-(it should be named something like `PaperJarDownloader-2.2.0-jar-with-dependencies.jar`)
+Copy the output jar file from the `build/libs` directory
+(it should be named something like `PaperJarDownloader-3.0.0-all.jar`)
 to the directory you want to run PaperJarDownloader from.
 Make sure that the jar file is named `PaperJarDownloader.jar`.
 Then, run the following commands to download the latest version of the PaperMC server jar file and start the server.
@@ -49,7 +49,7 @@ export MC_VERSION=1.18.2
 java -jar PaperJarDownloader.jar
 ```
 
-### Variant - Folia
+### Variant – Folia
 
 Likewise, you can set the environment variable `FOLIA` (Any value works, as long as the variable is set) to download the
 latest version of Folia instead of Paper.
@@ -77,6 +77,14 @@ If you want to specify a version, you can run the following command.
 ```bash
 docker run -it --rm -p "25565:25565" -v "$(pwd)/server:/app/server" -e "MC_VERSION=1.18.2" lukaslls/paper-jar-downloader:latest
 ```
+
+## Table of Environment Variables
+
+| Name              | Description                                                                                                                      | Default        |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------|----------------|
+| MC_VERSION        | The version of the PaperMC server jar file to download, i.e. '1.18.2'                                                            | latest         |
+| FOLIA             | Whether to download Folia instead of Paper, either 'true', or 'false'                                                            | false          |
+| LEGACY_DOWNLOADER | Whether to use the legacy REST downloader instead of the GraphQL downloader (not recommended), either 'true' or 'false'/\<unset> | \<unset>/false |
 
 ## Noteworthy
 
