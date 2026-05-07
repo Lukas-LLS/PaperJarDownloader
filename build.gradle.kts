@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "lls.pjd"
-version = "3.0.0"
+version = "3.0.1"
 
 repositories {
     mavenCentral()
@@ -37,5 +37,11 @@ apollo {
             endpointUrl.set("https://fill.papermc.io/graphql")
             schemaFile.set(file("src/main/graphql/schema.graphqls"))
         }
+    }
+}
+
+tasks.shadowJar {
+    manifest {
+        attributes["Main-Class"] = "lls.pjd.Main"
     }
 }
