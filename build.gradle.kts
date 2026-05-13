@@ -2,7 +2,7 @@ val kotlinVersion = "2.3.21"
 val ktorVersion = "3.4.3"
 val apolloVersion = "4.4.3"
 val logbackVersion = "1.5.32"
-val slf4jVersion = "2.0.17"
+val slf4jVersion = "2.0.18"
 
 plugins {
     kotlin("jvm") version "2.3.21"
