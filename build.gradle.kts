@@ -7,7 +7,7 @@ val slf4jVersion = "2.0.17"
 plugins {
     kotlin("jvm") version "2.3.21"
     id("com.gradleup.shadow") version "9.4.1"
-    id("com.apollographql.apollo") version "4.4.3"
+    id("com.apollographql.apollo") version "5.0.0"
 }
 
 group = "lls.pjd"
