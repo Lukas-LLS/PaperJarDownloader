@@ -11,6 +11,13 @@ updates:
       interval: "daily"
     assignees:
       - "Lukas-LLS"
+    groups:
+      graphql:
+        patterns:
+          - "com.apollographql.apollo*"
+      ktor:
+        patterns:
+          - "io.ktor*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

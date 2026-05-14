@@ -1,4 +1,3 @@
-val kotlinVersion = "2.3.21"
 val ktorVersion = "3.4.3"
 val apolloVersion = "4.4.3"
 val logbackVersion = "1.5.32"
