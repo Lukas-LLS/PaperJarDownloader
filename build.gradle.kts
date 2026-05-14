@@ -1,12 +1,12 @@
 val ktorVersion = "3.4.3"
-val apolloVersion = "4.4.3"
+val apolloVersion = "5.0.0"
 val logbackVersion = "1.5.32"
 val slf4jVersion = "2.0.18"
 
 plugins {
     kotlin("jvm") version "2.3.21"
     id("com.gradleup.shadow") version "9.4.1"
-    id("com.apollographql.apollo") version "4.4.3"
+    id("com.apollographql.apollo") version "5.0.0"
 }
 
 group = "lls.pjd"
