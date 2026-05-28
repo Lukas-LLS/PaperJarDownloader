@@ -1,6 +1,6 @@
 val ktorVersion = "3.5.0"
 val apolloVersion = "5.0.0"
-val logbackVersion = "1.5.32"
+val logbackVersion = "1.5.33"
 val slf4jVersion = "2.0.18"
 
 plugins {
