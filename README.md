@@ -5,8 +5,8 @@
 
 ## Introduction
 
-PaperJarDownloader is a tool to automatically download the latest version of the PaperMC server jar file.
-If a specific version is specified, it will download that version instead.
+PaperJarDownloader is a tool to automatically download the latest version of the PaperMC server jar file. If a specific
+version is specified, it will download that version instead.
 
 ## Building (Optional)
 
@@ -27,10 +27,9 @@ chmod +x ./gradlew
 
 ### Direct
 
-Copy the output jar file from the `build/libs` directory
-(it should be named something like `PaperJarDownloader-3.0.0-all.jar`)
-to the directory you want to run PaperJarDownloader from.
-Make sure that the jar file is named `PaperJarDownloader.jar`.
+Copy the output jar file from the `build/libs` directory (it should be named something like
+`PaperJarDownloader-3.0.0-all.jar`)
+to the directory you want to run PaperJarDownloader from. Make sure that the jar file is named `PaperJarDownloader.jar`.
 Then, run the following commands to download the latest version of the PaperMC server jar file and start the server.
 
 ```bash
@@ -61,16 +60,16 @@ java -jar PaperJarDownloader.jar
 
 ### Docker
 
-If you want to use the Docker image, you can skip the building step.
-The docker image is available on [Docker Hub](https://hub.docker.com/r/lukaslls/paper-jar-downloader).
-You can run the image as a docker container by running the following command.
+If you want to use the Docker image, you can skip the building step. The docker image is available
+on [Docker Hub](https://hub.docker.com/r/lukaslls/paper-jar-downloader). You can run the image as a docker container by
+running the following command.
 
 ```bash
 docker run -it --rm -p "25565:25565" -v "$(pwd)/server:/app/server" lukaslls/paper-jar-downloader:latest
 ```
 
-Note that this will create a directory called `server` in the current directory.
-This directory will contain the server files.
+Note that this will create a directory called `server` in the current directory. This directory will contain the server
+files.
 
 If you want to specify a version, you can run the following command.
 
@@ -89,3 +88,6 @@ docker run -it --rm -p "25565:25565" -v "$(pwd)/server:/app/server" -e "MC_VERSI
 ## Noteworthy
 
 The docker image uses Java 25 by default and will automatically download the latest version.
+
+The legacy REST downloader might not work in the future, as the REST API it is using is deprecated and will be removed
+in the future. It is recommended to use the GraphQL downloader instead.
