@@ -22,11 +22,11 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
       - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@v6
+        uses: gradle/actions/wrapper-validation@v6.2.0
       - name: Make Gradle wrapper executable
         run: chmod +x gradlew
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v6.2.0
       - name: Build with Gradle
         run: ./gradlew shadowJar
       - name: Login to Docker Hub
