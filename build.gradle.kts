@@ -1,4 +1,4 @@
-val ktorVersion = "3.5.1"
+val ktorVersion = "3.5.2"
 val apolloVersion = "5.0.1"
 val logbackVersion = "1.6.1"
 val slf4jVersion = "2.0.18"
