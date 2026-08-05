@@ -20,10 +20,10 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
       - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@v6.2.0
+        uses: gradle/actions/wrapper-validation@v6.3.0
       - name: Make Gradle wrapper executable
         run: chmod +x gradlew
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v6.2.0
+        uses: gradle/actions/setup-gradle@v6.3.0
       - name: Build with Gradle
         run: ./gradlew shadowJar
