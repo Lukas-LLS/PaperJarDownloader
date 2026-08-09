@@ -30,7 +30,7 @@ object Main {
                 versions = downloader.getVersions(folia)
             }
             version = versions
-                .filterNot { it.contains("pre") }
+                .filterNot { it.contains("pre") || it.contains("rc") }
                 .maxByOrNull {
                     val split = it.split(".")
                     split[0].toInt() * 100 + split[1].toInt() * 10 + runCatching { split[2].toInt() }.getOrElse { 0 }
