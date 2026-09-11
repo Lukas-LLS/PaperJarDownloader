@@ -4,7 +4,7 @@ val logbackVersion = "1.6.3"
 val slf4jVersion = "2.0.19"
 
 plugins {
-    kotlin("jvm") version "2.4.10"
+    kotlin("jvm") version "2.4.20"
     id("com.gradleup.shadow") version "9.6.1"
     id("com.apollographql.apollo") version "5.1.0"
 }
